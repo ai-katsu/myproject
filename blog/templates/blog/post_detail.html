@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>{{ post.title }}</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<div class="post">
+  <h1>{{ post.title }}</h1>
+  <p>{{ post.content }}</p>
+</div>
+
+<div class="comments">
+  <h2>コメント一覧</h2>
+  {% for comment in comments %}
+    <div class="comment">
+      <div class="comment-author">{{ comment.author }}</div>
+      <div class="comment-text">{{ comment.text }}</div>
+    </div>
+  {% empty %}
+    <p>コメントはまだありません。</p>
+  {% endfor %}
+</div>
+
+</body>
+</html>
