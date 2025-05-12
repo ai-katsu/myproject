@@ -1,0 +1,26 @@
+<!-- blog/templates/blog/post_form.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>投稿作成</title>
+</head>
+<body>
+    <h1>新規投稿</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <label>タイトル：</label><br>
+        <input type="text" name="title" value="{{ post.title|default_if_none:'' }}"><br><br>
+
+        <label>本文：</label><br>
+        <textarea name="content" rows="5" cols="40">{{ post.content|default_if_none:'' }}</textarea><br><br>
+
+        <button type="submit">
+            {% if post %}保存{% else %}投稿{% endif %}
+        </button>
+    </form>
+
+    <p><a href="{% url 'post_index' %}">← 戻る</a></p>
+</body>
+</html>

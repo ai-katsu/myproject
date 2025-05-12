@@ -1,11 +1,9 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <title>{{ post.title }}</title>
-  {% load static %}
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
@@ -13,6 +11,12 @@
 <div class="post">
   <h1>{{ post.title }}</h1>
   <p>{{ post.content }}</p>
+</div>
+
+<div class="post-actions">
+  <a href="{% url 'post_edit' post.id %}">編集</a> |
+  <a href="{% url 'post_delete' post.id %}">削除</a> |
+  <a href="{% url 'post_index' %}">← 一覧へ戻る</a>
 </div>
 
 <div class="comments">
@@ -25,6 +29,20 @@
   {% empty %}
     <p>コメントはまだありません。</p>
   {% endfor %}
+</div>
+
+<div class="comment-form">
+  <h2>コメントを投稿</h2>
+  <form method="POST">
+    {% csrf_token %}
+    <label>名前：</label>
+    <input type="text" name="author" required><br><br>
+
+    <label>コメント：</label><br>
+    <textarea name="text" rows="4" required></textarea><br><br>
+
+    <button type="submit">コメントする</button>
+  </form>
 </div>
 
 </body>

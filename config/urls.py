@@ -15,18 +15,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from django.urls import path, include  # ← includeを追加
-# static() 追加に必要なインポート
+from django.urls import path, include  # ✅ path, include を一括 import
+
 from django.conf import settings
 from django.conf.urls.static import static
 from pathlib import Path
 
-
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('blog/', include('blog.urls')),  # ← この行を追加
-    
+    path("admin/", admin.site.urls),
+    path("blog/", include("blog.urls")),  # ✅ blog アプリの URL に委譲
 ]
-# 静的ファイルのルーティングを urlpatterns に追加（開発中のみ）
-urlpatterns += static(settings.STATIC_URL, document_root=Path(__file__).resolve().parent.parent / 'blog' / 'static')
+
+# ✅ 静的ファイルのルーティング（開発環境用）
+urlpatterns += static(
+    settings.STATIC_URL,
+    document_root=Path(__file__).resolve().parent.parent / "blog" / "static"
+)

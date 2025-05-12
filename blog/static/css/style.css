@@ -1,58 +1,111 @@
-/* 全体のスタイル設定 */
+/* ===== 全体レイアウト設定 ===== */
 body {
-  font-family: sans-serif;                 /* フォントをシンプルなサンセリフ系にする */
-  margin: 30px;                            /* 画面周囲に余白をとる */
-  background-color: #f7f7f7;               /* 背景色を明るいグレーにする */
+  font-family: sans-serif;
+  margin: 30px;
+  background-color: #f7f7f7;
 }
 
-/* 投稿全体のボックスデザイン */
+/* ===== 投稿（Post）のボックス ===== */
 .post {
-  background: white;                       /* 背景を白に */
-  padding: 20px;                           /* 内側に余白を入れる */
-  border-radius: 8px;                      /* 角を丸くする */
-  box-shadow: 0 0 8px rgba(0,0,0,0.1);      /* うっすら影をつけて浮き上がらせる */
-  margin-bottom: 30px;                     /* 下にスペースを空ける */
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
 }
 
-/* 投稿タイトルのデザイン */
 .post h1 {
-  font-size: 24px;                         /* フォントサイズ大きめ */
-  margin-bottom: 10px;                     /* タイトルの下に余白 */
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 
-/* コメント一覧全体のボックス */
+/* ===== 編集・削除・戻るリンク ===== */
+.post-actions a {
+  margin-right: 10px;
+  color: #666;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.post-actions a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+/* ===== コメント一覧 ===== */
 .comments {
-  background: #fff;                        /* 背景は白 */
-  padding: 15px;                           /* 内側余白 */
-  border-radius: 6px;                      /* 少し角を丸く */
-  box-shadow: 0 0 6px rgba(0,0,0,0.05);     /* 少しだけ影をつける */
+  background: #fff;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+  margin-top: 30px;
 }
 
-/* コメント一覧の見出し */
 .comments h2 {
-  font-size: 18px;                         /* フォントサイズ中くらい */
-  border-bottom: 1px solid #ddd;           /* 下に薄い線を引く */
-  padding-bottom: 5px;                     /* 線とテキストの間の余白 */
+  font-size: 18px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
 }
 
-/* 個別コメント1つずつの枠 */
 .comment {
-  padding: 10px 0;                         /* 上下に余白 */
-  border-bottom: 1px solid #eee;           /* 区切り線（薄め） */
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
 }
 
-/* 最後のコメントだけ区切り線を消す */
 .comment:last-child {
-  border-bottom: none;                     /* 最後の行だけ区切りを非表示に */
+  border-bottom: none;
 }
 
-/* コメント投稿者の名前 */
 .comment-author {
-  font-weight: bold;                       /* 太字で目立たせる */
-  color: #333;                             /* 濃いグレーで読みやすく */
+  font-weight: bold;
+  color: #333;
 }
 
-/* コメント本文 */
 .comment-text {
-  margin-top: 5px;                         /* 投稿者名との間に余白 */
+  margin-top: 5px;
+}
+
+/* ===== コメントフォーム ===== */
+form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+  margin-top: 30px;
+}
+
+form label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+form input[type="text"],
+form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+form button {
+  margin-top: 15px;
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+form button:hover {
+  background-color: #45a049;
 }
