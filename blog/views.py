@@ -59,3 +59,10 @@ def post_delete(request, post_id):
         return redirect("post_index")
 
     return render(request, "blog/post_confirm_delete.html", {"post": post})
+
+def comment_delete(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+    post_id = comment.post.id
+    if request.method == "POST":
+        comment.delete()
+    return redirect("post_detail", post_id=post_id)

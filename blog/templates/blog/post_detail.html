@@ -25,6 +25,10 @@
     <div class="comment">
       <div class="comment-author">{{ comment.author }}</div>
       <div class="comment-text">{{ comment.text }}</div>
+      <form method="POST" action="{% url 'comment_delete' comment.id %}" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit">削除</button>
+      </form>
     </div>
   {% empty %}
     <p>コメントはまだありません。</p>

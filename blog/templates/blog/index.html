@@ -1,25 +1,25 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>投稿一覧</title>
-    {% load static %}
-    <script src="{% static 'js/script.js' %}"></script> <!-- ✅ JS追加 -->
+  <meta charset="UTF-8">
+  <title>投稿一覧</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <h1>投稿一覧</h1>
-    <ul>
-        {% for post in posts %}
-        <li>
-            {{ post.title }}（{{ post.created_at }}）
-            <button onclick="toggleDetail('{{ post.id }}')">詳細を表示</button> <!-- ✅ ボタン追加 -->
-            <div id="detail-{{ post.id }}" style="display: none;"> <!-- ✅ 詳細部分 -->
-                <p>{{ post.content|truncatechars:100 }}</p>
-            </div>
-        </li>
-        {% empty %}
-        <li>まだ投稿がありません。</li>
-        {% endfor %}
-    </ul>
+
+<h1>投稿一覧</h1>
+
+{% for post in posts %}
+  <div class="post">
+    <h2><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h2>
+    <p>{{ post.content|truncatewords:20 }}</p>
+  </div>
+{% empty %}
+  <p>投稿はまだありません。</p>
+{% endfor %}
+
+<a href="{% url 'post_create' %}">＋ 新規投稿</a>
+
 </body>
 </html>
