@@ -1,7 +1,8 @@
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.forms import UserCreationForm
 
-from .models import Comment, Post
-
+from .models import Post, Comment
+from django.contrib.auth.decorators import login_required
 
 # トップページのビュー関数
 def index(request):
@@ -30,11 +31,12 @@ def post_detail(request, post_id):
 
 
 # 投稿作成ページのビュー関数
+@login_required
 def post_create(request):
     if request.method == "POST":
         title = request.POST.get("title")
         content = request.POST.get("content")
-        Post.objects.create(title=title, content=content)
+        Post.objects.create(title=title, content=content, author=request.user)
         return redirect("post_index")
     return render(request, "blog/post_form.html")
 
@@ -66,3 +68,19 @@ def comment_delete(request, comment_id):
     if request.method == "POST":
         comment.delete()
     return redirect("post_detail", post_id=post_id)
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')  # 登録後ログイン画面へ
+    else:
+        form = UserCreationForm()
+    return render(request, 'signup.html', {'form': form})
+
+
+@login_required
+def home(request):
+    return render(request, 'home.html')

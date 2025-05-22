@@ -1,0 +1,21 @@
+<h2>ダッシュボード</h2>
+<p>ようこそ、{{ user.username }} さん</p>
+
+<hr>
+
+<h3>📌 投稿メニュー</h3>
+<ul>
+  <li><a href="{% url 'post_create' %}">＋ 新規投稿</a></li>
+  <li><a href="{% url 'post_index' %}">📄 投稿一覧を見る</a></li>
+</ul>
+
+<h3>📊 今後追加するセクション</h3>
+<ul>
+  <li><a href="#">📁 ファイル管理（予定）</a></li>
+  <li><a href="#">💬 コメント管理（予定）</a></li>
+  <li><a href="#">👤 ユーザー設定（予定）</a></li>
+</ul>
+
+<hr>
+
+<p><a href="{% url 'logout' %}">🔓 ログアウト</a></p>

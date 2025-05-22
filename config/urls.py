@@ -15,7 +15,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include  # ✅ path, include を一括 import
+from django.urls import path, include
+from django.contrib.auth import views as auth_views  # ← 追加
+
+from blog import views as blog_views  # ← homeビューも使いたい場合
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -23,10 +26,12 @@ from pathlib import Path
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("blog/", include("blog.urls")),  # ✅ blog アプリの URL に委譲
+    path("login/", auth_views.LoginView.as_view(template_name="login.html"), name="login"),  # ← 追加
+    path("logout/", auth_views.LogoutView.as_view(next_page="login"), name="logout"),        # ← 追加
+    path("home/", blog_views.home, name="home"),  # ← homeビューが blog/views.py にある想定
+    path("", include("blog.urls")),
 ]
 
-# ✅ 静的ファイルのルーティング（開発環境用）
 urlpatterns += static(
     settings.STATIC_URL,
     document_root=Path(__file__).resolve().parent.parent / "blog" / "static"
